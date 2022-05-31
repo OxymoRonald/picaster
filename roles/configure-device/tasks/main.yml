@@ -51,12 +51,20 @@
     name: unclutter
     state: latest
 
+# Deploy kiosk startup script from template
+- name: Create kiosk startup script and make it executable
+  template: 
+    src: kiosk.j2
+    dest: /home/picaster/kiosk.sh
+    mode: '0755'
 
+# Deploy customized bashrc file
+- name: Create custom .bashrc file
+  template: 
+    src: bashrc.j2
+    dest: /home/picaster/.bashrc
+    mode: '0644'
 
-
-# Configure software packages
-# Browser
-
-# Hide cursor
-
-# Auto login
+# Reboot the device
+- name: Reboot device
+  reboot:
