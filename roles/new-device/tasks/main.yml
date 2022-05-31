@@ -1,0 +1,35 @@
+---
+# tasks file for new-device
+# device_name: "{{ alias }}"
+# device_ip: "{{ ip }}"
+# device_url: "{{ url }}"
+
+# Add SSH key to known hosts.
+- name: Add the new SSH fingerprints for "{{ device_name }}"
+  shell: ssh-keyscan -H {{ device_ip }} >> ~/.ssh/known_hosts
+
+# Load role variables
+# - name: Load variables
+#   include_vars: 
+#     file: ~/picaster/roles/new-device/vars/main.yml
+
+# Check if default password id set
+- name: Print variable
+  debug:
+    var: default_password 
+
+# Enable certificate based login
+# ssh-copy-id -i ~/.ssh/id_rsa IP_ADDRESS
+- name: Copy public key to {{ device_name }}
+  shell: |
+    export SSHPASS="{{ default_password }}"
+    sshpass -e ssh-copy-id -i ~/.ssh/id_rsa "{{ device_ip }}"
+    unset SSHPASS
+  no_log: true
+
+# Add device to inventory
+
+
+# Refresh inventory
+- name: Refresh inventory
+  meta: refresh_inventory

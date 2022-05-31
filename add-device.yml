@@ -1,0 +1,16 @@
+---
+# Configure new device and add it to the inventory
+# ansible-playbook add-device.yml -e "ip=192.168.1.151 alias=afspeelapparaat1 url=http://www.google.com"
+
+# Add new device (afspeelapparaat)
+- name: Add new device
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: new-device
+      vars:
+        device_name: "{{ alias }}"
+        device_ip: "{{ ip }}"
+        device_url: "{{ url }}"
+
+# Configure new device (afspeelapparaat)
