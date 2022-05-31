@@ -14,3 +14,10 @@
         device_url: "{{ url }}"
 
 # Configure new device (afspeelapparaat)
+- name: Configure new device
+  hosts: "{{ alias }}"
+  become: true
+  roles: 
+    - role: configure-device
+      vars: 
+        device_url: "{{ url }}"

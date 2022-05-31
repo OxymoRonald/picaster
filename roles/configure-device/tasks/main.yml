@@ -1,2 +1,62 @@
 ---
 # tasks file for configure-device
+
+# Test connection
+- name: Test connection 
+  ping:
+
+# Disable SSH username password login
+
+# Disable USB ports
+
+
+# Install software packages
+# Update repository
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+# Install the X window system
+- name: Install the X window system
+  apt:
+    pkg:
+      - xserver-xorg
+      - xinit
+      - x11-xserver-utils
+    state: latest
+    install_recommends: no
+
+# Install Chromium
+- name: Install Chromium
+  apt: 
+    name: chromium-browser
+    state: latest
+
+# Install matchbox-window-manager
+- name: Install matchbox-window-manager
+  apt: 
+    name: matchbox-window-manager
+    state: latest
+
+# Install xAutomation
+- name: Install xAutomation
+  apt: 
+    name: xautomation
+    state: latest
+
+# Install unclutter to hide mouse
+- name: Install Unclutter
+  apt: 
+    name: unclutter
+    state: latest
+
+
+
+
+# Configure software packages
+# Browser
+
+# Hide cursor
+
+# Auto login
