@@ -1,12 +1,16 @@
+---
 all:
-  hosts:
-    conference_room:
-      ansible_host: 192.168.1.151
-      target_url: "https://youtu.be/LDU_Txk06tM"
   children:
-    livestream:
+    placeholdergroup:
       hosts:
-        conference_room:
-      vars: 
-        livestream_url: "https://youtu.be/kw6_Y_Z3kp0"
-        livestream_enabled: true
+        placeholderhost: null
+      vars:
+        livestream_enabled: false
+        livestream_url: none
+  hosts:
+    afspeelapparaat1:
+      ansible_host: 192.168.1.151
+      target_url: http://www.google.com
+    placeholderhost:
+      ansible_host: 0.0.0.0
+      target_url: none

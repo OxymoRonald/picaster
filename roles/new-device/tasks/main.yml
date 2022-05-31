@@ -14,9 +14,9 @@
 #     file: ~/picaster/roles/new-device/vars/main.yml
 
 # Check if default password id set
-- name: Print variable
-  debug:
-    var: default_password 
+# - name: Print variable
+#   debug:
+#     var: default_password 
 
 # Enable certificate based login
 # ssh-copy-id -i ~/.ssh/id_rsa IP_ADDRESS
@@ -28,7 +28,8 @@
   no_log: true
 
 # Add device to inventory
-
+- name: Add {{ device_name }} to inventory
+  script: add-host-to-inventory.py "{{ device_name }}" "{{ device_ip }}" "{{ device_url }}"
 
 # Refresh inventory
 - name: Refresh inventory
