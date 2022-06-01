@@ -1,0 +1,20 @@
+---
+# ansible-playbook remove-group.yml -e "group_name=TestGroup3"
+
+# Reset clients to their own URL (deactivate)
+- name: Update target URL
+  hosts: "{{ group_name }}"
+  become: true
+  roles: 
+    - role: deactivate-group
+  ignore_unreachable: yes
+
+# Remove group from inventory
+- name: Remove group from inventory
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: remove-group
+      vars:
+        device_name: "{{ device_name }}"
+        group_name: "{{ group_name }}"

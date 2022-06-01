@@ -1,16 +1,6 @@
 ---
 all:
   children:
-    TestGroup3:
-      hosts:
-        dummy: null
-      vars:
-        TestGroup3_url: http://www.google.com
-    TestGroup4:
-      hosts:
-        dummy: null
-      vars:
-        TestGroup4_url: http://www.google.com
     testgroep1:
       hosts:
         afspeelapparaat1: null
@@ -25,7 +15,7 @@ all:
   hosts:
     afspeelapparaat1:
       ansible_host: 192.168.1.151
-      target_url: https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1
+      target_url: https://serverfault.com/questions/1026981/returning-python-script-value-and-using-that-in-the-ansible-task
     afspeelapparaat2:
       ansible_host: 192.168.1.152
       target_url: https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1

@@ -1,0 +1,6 @@
+---
+# tasks file for remove-group
+
+# Remove a group
+- name: Remove {{ group_name }}
+  script: remove-group.py "{{ group_name }}"
