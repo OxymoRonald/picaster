@@ -1,0 +1,10 @@
+---
+# Reset device
+# ansible-playbook reset-device.yml -e "device_name=afspeelapparaat1"
+
+# Reset device (afspeelapparaat)
+- name: "Reset device {{ device_name }}"  
+  hosts: "{{ device_name }}"
+  become: true
+  roles: 
+    - role: configure-device
