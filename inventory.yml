@@ -1,16 +1,16 @@
 ---
 all:
   children:
-    placeholdergroup:
+    dummygroup:
       hosts:
-        placeholderhost: null
+        dummy: null
       vars:
         livestream_enabled: false
-        livestream_url: none
+        livestream_url: https://google.com
   hosts:
     afspeelapparaat1:
       ansible_host: 192.168.1.151
-      target_url: https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1
-    placeholderhost:
+      target_url: https://www.acquire.nl
+    dummy:
       ansible_host: 0.0.0.1
-      target_url: none
+      target_url: https://google.com

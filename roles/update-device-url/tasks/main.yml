@@ -1,25 +1,19 @@
 ---
 # tasks file for update-device-url
 
-# Update repository
-- name: Update APT cache
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
+# Update target URL
+# python roles/update-device-url/files/update-device-url.py afspeelapparaat1 https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1
+- name: Update device URL for {{ target }}
+  script: update-device-url.py "{{ target }}" "{{ target_url }}"
+  delegate_to: 127.0.0.1
 
-# Update all packages
-- name: Update all packages to their latest version
-  apt:
-    name: "*"
-    state: latest
+# Deploy kiosk startup script from template
+- name: Create kiosk startup script and make it executable
+  template: 
+    src: kiosk.j2
+    dest: /home/picaster/kiosk.sh
+    mode: '0755'
 
-# Check if reboot is required
-- name: Check if reboot required
-  stat:
-    path: /var/run/reboot-required
-  register: reboot_required
-
-# Reboot if required
-- name: Reboot if required
-  reboot:
-  when: reboot_required.stat.exists == true
+# Start kiosk.sh script as normal user (non elevated)
+- name: Display the new page
+  command: runuser -l picaster -c 'sh /home/picaster/kiosk.sh'
