@@ -16,5 +16,4 @@
   roles:
     - role: remove-group
       vars:
-        device_name: "{{ device_name }}"
         group_name: "{{ group_name }}"

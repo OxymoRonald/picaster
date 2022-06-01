@@ -1,0 +1,11 @@
+---
+# ansible-playbook remove-device.yml -e "device_name=afspeelapparaat2"
+
+# Remove device from inventory
+- name: Remove device from inventory
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: remove-device
+      vars:
+        device_name: "{{ device_name }}"

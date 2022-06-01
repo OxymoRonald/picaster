@@ -1,0 +1,6 @@
+---
+# tasks file for remove-device
+
+# Remove a group
+- name: Remove {{ device_name }}
+  script: remove-device.py "{{ device_name }}"
