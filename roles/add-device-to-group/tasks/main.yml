@@ -1,0 +1,6 @@
+---
+# tasks file for add-device-to-group
+
+# Add device to group
+- name: Add {{ device_name }} to {{ group_name }}
+  script: add-device-to-group.py "{{ device_name }}" "{{ group_name }}"

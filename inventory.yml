@@ -6,11 +6,6 @@ all:
         dummy: null
       vars:
         group_url: http://www.google.com
-    TestGroup3:
-      hosts:
-        dummy: null
-      vars:
-        group_url: http://www.google.com
     testgroep1:
       hosts:
         dummy: null

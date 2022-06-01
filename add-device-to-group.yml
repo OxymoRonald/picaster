@@ -1,0 +1,12 @@
+---
+# ansible-playbook add-device-to-group.yml -e "device_name=afspeelapparaat1 group_name=testgroep1"
+
+# Add device to group
+- name: Add device to group
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: add-device-to-group
+      vars:
+        device_name: "{{ device_name }}"
+        group_name: "{{ group_name }}"
