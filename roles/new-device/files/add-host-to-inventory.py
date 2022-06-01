@@ -23,9 +23,9 @@ inventory_dict = yaml.load(inventory, Loader=yaml.FullLoader)
 # Close inventory file
 inventory.close()
 
-# Pretty print the inventory
-# print(">> Pretty print inventory <<")
-# print(yaml.dump(inventory_dict, default_flow_style=False))
+#Pretty print the inventory
+print(">> Pretty print inventory <<")
+print(yaml.dump(inventory_dict, default_flow_style=False))
 
 # Backup the inventory
 # Get current time for backup
@@ -36,12 +36,22 @@ backupfile.write(yaml.dump(inventory_dict, default_flow_style=False))
 backupfile.close()
 
 # Add server to inventory
-# print(">> Add server to inventory <<")
+print(">> Add server to inventory <<")
 inventory_dict['all']['hosts'].update({inventory_alias: {'ansible_host': inventory_ip, 'target_url': inventory_url}})
 
 # Pretty print new inventory
-# print(">> Pretty print new inventory <<")
-# print(yaml.dump(inventory_dict, default_flow_style=False))
+print(">> Pretty print new inventory <<")
+print(yaml.dump(inventory_dict, default_flow_style=False))
+
+# Delete dummy entry if exists
+try: 
+    del inventory_dict['all']['hosts']['dummy']
+except Exception:
+    pass
+
+# Pretty print new inventory
+print(">> Pretty print new inventory <<")
+print(yaml.dump(inventory_dict, default_flow_style=False))
 
 # Overwrite inventory file
 outfile = open(inventory_file,'w')

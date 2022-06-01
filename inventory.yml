@@ -10,7 +10,4 @@ all:
   hosts:
     afspeelapparaat1:
       ansible_host: 192.168.1.151
-      target_url: https://www.acquire.nl
-    dummy:
-      ansible_host: 0.0.0.1
-      target_url: https://google.com
+      target_url: https://youtu.be/LDU_Txk06tM
