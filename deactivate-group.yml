@@ -1,0 +1,10 @@
+---
+# Deactivate group
+# ansible-playbook deactivate-group.yml -e "group_name=testgroep1"
+
+# Update device/ group (afspeelapparaat)
+- name: Update target URL
+  hosts: "{{ group_name }}"
+  become: true
+  roles: 
+    - role: deactivate-group

@@ -1,0 +1,15 @@
+---
+# tasks file for deactivate-group
+
+# Update target URL
+
+# Deploy kiosk startup script from template
+- name: Create kiosk startup script and make it executable
+  template: 
+    src: kiosk.j2
+    dest: /home/picaster/kiosk.sh
+    mode: '0755'
+
+# Start kiosk.sh script as normal user (non elevated)
+- name: Display the new page
+  command: runuser -l picaster -c 'sh /home/picaster/kiosk.sh'
