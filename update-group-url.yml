@@ -1,0 +1,12 @@
+---
+# ansible-playbook update-group-url.yml -e "group_name=testgroep1 group_url=https://www.google.com"
+
+# Update device/ group (afspeelapparaat)
+- name: Update target URL
+  hosts: localhost
+  gather_facts: false
+  roles: 
+    - role: update-group-url
+      vars:
+        group_name: "{{ group_name }}"
+        group_url: "{{ group_url }}"

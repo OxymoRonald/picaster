@@ -1,0 +1,5 @@
+---
+# tasks file for update-group-url
+
+- name: Update group URL for {{ group_name }}
+  script: update-group-url.py "{{ group_name }}" "{{ group_url }}"

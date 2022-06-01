@@ -8,7 +8,7 @@ all:
         group_url: http://www.google.com
     testgroep1:
       hosts:
-        dummy: null
+        afspeelapparaat1: null
       vars:
         group_url: https://www.google.com
   hosts:
