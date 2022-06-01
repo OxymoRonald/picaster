@@ -10,7 +10,7 @@ all:
   hosts:
     afspeelapparaat1:
       ansible_host: 192.168.1.151
-      target_url: http://www.google.com
+      target_url: https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1
     placeholderhost:
-      ansible_host: 0.0.0.0
+      ansible_host: 0.0.0.1
       target_url: none

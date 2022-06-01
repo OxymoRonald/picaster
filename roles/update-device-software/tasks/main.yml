@@ -1,0 +1,25 @@
+---
+# tasks file for update-device
+
+# Update repository
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+# Update all packages
+- name: Update all packages to their latest version
+  apt:
+    name: "*"
+    state: latest
+
+# Check if reboot is required
+- name: Check if reboot required
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
+# Reboot if required
+- name: Reboot if required
+  reboot:
+  when: reboot_required.stat.exists == true
