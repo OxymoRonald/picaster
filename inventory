@@ -1,9 +1,0 @@
-[all]
-conference_room ansible_host="192.168.1.151" target_url="https://youtu.be/LDU_Txk06tM"
-
-[livestream]
-conference_room
-
-[livestream:vars]
-livestream_url="https://youtu.be/kw6_Y_Z3kp0"
-livestream_enabled=true

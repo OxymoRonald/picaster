@@ -1,0 +1,26 @@
+---
+# tasks file for activate-group
+
+# Run python script to return group URL
+- name: Get group URL for {{ group_name }}
+  script: get-url-from-inventory.py "{{ group_name }}"
+  register: result
+  delegate_to: 127.0.0.1
+
+# - name: Returned URL
+#   debug: 
+#     msg: "{{ result.stdout }}"
+
+# Deploy kiosk startup script from template
+- name: Create kiosk startup script and make it executable
+  template: 
+    src: kiosk.j2
+    dest: /home/picaster/kiosk.sh
+    mode: '0755'
+  vars: 
+    target_url: "{{ result.stdout }}"
+
+# Start kiosk.sh script as normal user (non elevated)
+- name: Display the new page
+  command: runuser -l picaster -c 'sh /home/picaster/kiosk.sh'
+  

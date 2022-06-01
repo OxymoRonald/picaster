@@ -35,7 +35,7 @@ backupfile.close()
 
 # Add group to inventory
 # print(">> Add group to inventory <<")
-inventory_dict['all']['children'].update({inventory_alias: {'hosts': {'dummy': None}, 'vars': { "group_url": inventory_url}}})
+inventory_dict['all']['children'].update({inventory_alias: {'hosts': {'dummy': None}, 'vars': { inventory_alias +"_url": inventory_url}}})
 
 # Remove dummy group from inventory
 # Delete dummy entry if exists

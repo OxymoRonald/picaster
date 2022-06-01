@@ -34,7 +34,7 @@ backupfile.write(yaml.dump(inventory_dict, default_flow_style=False))
 backupfile.close()
 
 # Update URL
-inventory_dict['all']['children'][inventory_group]['vars'].update({'group_url': inventory_url})
+inventory_dict['all']['children'][inventory_group]['vars'].update({ inventory_group +'_url': inventory_url})
 # https://www.youtube.com/embed/db0A0Jt2Al4?autoplay=1
 
 # Pretty print new inventory

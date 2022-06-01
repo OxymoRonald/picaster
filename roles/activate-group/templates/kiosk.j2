@@ -1,0 +1,9 @@
+#!/bin/sh
+# Script from https://reelyactive.github.io/diy/pi-kiosk/
+
+xset -dpms     # disable DPMS (Energy Star) features.
+xset s off     # disable screen saver
+xset s noblank # don't blank the video device
+matchbox-window-manager -use_titlebar no &
+unclutter &    # hide X mouse cursor unless mouse activated
+chromium-browser --display=:0 --kiosk --incognito --autoplay-policy=no-user-gesture-required --window-position=0,0 {{ target_url }}

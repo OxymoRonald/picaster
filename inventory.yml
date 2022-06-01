@@ -1,17 +1,17 @@
 ---
 all:
   children:
-    TestGroup2:
+    TestGroup3:
       hosts:
         dummy: null
       vars:
-        group_url: http://www.google.com
+        TestGroup3_url: http://www.google.com
     testgroep1:
       hosts:
         afspeelapparaat1: null
       vars:
-        group_url: https://www.google.com
+        testgroep1_url: https://www.google.com
   hosts:
     afspeelapparaat1:
       ansible_host: 192.168.1.151
-      target_url: https://youtu.be/LDU_Txk06tM
+      target_url: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto

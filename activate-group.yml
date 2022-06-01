@@ -1,0 +1,12 @@
+---
+# This will switch the URL of all memebers of the group to the group URL
+# ansible-playbook activate-group.yml -e "group_name=testgroep1"
+
+# Activate group
+- name: Add device to group
+  hosts: "{{ group_name }}"
+  become: true
+  roles:
+    - role: activate-group
+      vars:
+        group_name: "{{ group_name }}"
