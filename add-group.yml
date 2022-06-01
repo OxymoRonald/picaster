@@ -1,0 +1,12 @@
+---
+# ansible-playbook add-group.yml -e "groupname=TestGroup3 url=http://www.google.com"
+
+# Add new group
+- name: Add new group
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: new-group
+      vars:
+        group_name: "{{ groupname }}"
+        group_url: "{{ url }}"

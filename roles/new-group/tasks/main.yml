@@ -1,0 +1,8 @@
+---
+# tasks file for new-group
+# group_name: "{{ name }}"
+# group_url: "{{ url }}"
+
+# Add device to inventory
+- name: Add {{ group_name }} to inventory
+  script: add-group-to-inventory.py "{{ group_name }}" "{{ group_url }}"

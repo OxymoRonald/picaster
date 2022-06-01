@@ -9,8 +9,7 @@ from datetime import datetime
 inventory_directory = "/home/picaster/picaster/"
 inventory_file = inventory_directory + "inventory.yml"
 inventory_alias = sys.argv[1]
-inventory_ip = sys.argv[2]
-inventory_url = sys.argv[3]
+inventory_url = sys.argv[2]
 
 # Open inventory file as read only.
 # print(">> Import inventory file read only <<")
@@ -34,17 +33,14 @@ backupfile.write("---\n")
 backupfile.write(yaml.dump(inventory_dict, default_flow_style=False)) 
 backupfile.close()
 
-# Add server to inventory
-# print(">> Add server to inventory <<")
-inventory_dict['all']['hosts'].update({inventory_alias: {'ansible_host': inventory_ip, 'target_url': inventory_url}})
+# Add group to inventory
+# print(">> Add group to inventory <<")
+inventory_dict['all']['children'].update({inventory_alias: {'hosts': {'dummy': None}, 'vars': { "group_url": inventory_url}}})
 
-# Pretty print new inventory
-# print(">> Pretty print new inventory <<")
-# print(yaml.dump(inventory_dict, default_flow_style=False))
-
+# Remove dummy group from inventory
 # Delete dummy entry if exists
 try: 
-    del inventory_dict['all']['hosts']['dummy']
+    del inventory_dict['all']['children']['dummygroup']
 except Exception:
     pass
 
