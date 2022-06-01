@@ -1,0 +1,11 @@
+---
+# Target is device or group
+# ansible-playbook update-device-url.yml -e "target=afspeelapparaat1"
+# ansible-playbook update-device-url.yml -e "target=all"
+
+# Update device/ group (afspeelapparaat)
+- name: Update target URL
+  hosts: "{{ target }}"
+  become: true
+  roles: 
+    - role: update-device-url

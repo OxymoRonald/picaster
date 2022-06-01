@@ -1,0 +1,11 @@
+---
+# Target is device or group
+# ansible-playbook update-device-packages.yml -e "target=afspeelapparaat1"
+
+
+# Update device/ group (afspeelapparaat)
+- name: Update installed packages 
+  hosts: "{{ target }}"
+  become: true
+  roles: 
+    - role: update-device-packages

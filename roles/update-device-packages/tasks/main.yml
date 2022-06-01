@@ -1,5 +1,5 @@
 ---
-# tasks file for update-device
+# tasks file for update-device-packages
 
 # Update repository
 - name: Update APT cache
