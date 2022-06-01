@@ -1,0 +1,20 @@
+---
+# ansible-playbook remove-device-from-group.yml -e "device_name=afspeelapparaat1 group_name=testgroep5"
+
+# Remove device from group
+- name: Remove device from group
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: remove-device-from-group
+      vars:
+        device_name: "{{ device_name }}"
+        group_name: "{{ group_name }}"
+
+# Reset the browser
+# Update device/ group (afspeelapparaat)
+- name: Update target URL
+  hosts: "{{ device_name }}"
+  become: true
+  roles: 
+    - role: deactivate-group
