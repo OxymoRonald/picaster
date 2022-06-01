@@ -34,7 +34,7 @@ backupfile.close()
 
 # Remove device from all groups
 for key in inventory_dict['all']['children']:
-    print(key)
+    #print(key)
     # If less than 2 devices exist in group and is device to be removed, add dummy
     device_count = len(inventory_dict['all']['children'][key]['hosts'].keys())
     # If there's only one key

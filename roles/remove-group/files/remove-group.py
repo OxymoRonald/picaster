@@ -32,6 +32,14 @@ backupfile.write("---\n")
 backupfile.write(yaml.dump(inventory_dict, default_flow_style=False)) 
 backupfile.close()
 
+# If there's onyl one group left, add a dummy group.
+group_count = len(inventory_dict['all']['children'].keys())
+if group_count < 2:
+    # Add dummy group
+    inventory_dict['all']['children'].update({'dummygroup': {'hosts': {'dummy': None}, 'vars': { 'dummy_url': 'https://www.acquire.nl/'}}})
+
+#print(group_count)
+
 # Remove the group
 try: 
     del inventory_dict['all']['children'][inventory_group]
