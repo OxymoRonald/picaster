@@ -27,6 +27,7 @@ inventory.close()
 parser=argparse.ArgumentParser()
 parser.add_argument("--listgroups", help="Creates a list of all groups", action="store_true")
 parser.add_argument("--groupinfo", help="Gets info on specific group", metavar="group_name")
+parser.add_argument("--groupmembers", help="Gets info on specific group", metavar="group_name")
 args = parser.parse_args()
 
 # If --listclients is set
@@ -68,3 +69,18 @@ if args.groupinfo:
         #print(memberlist)
         data = [args.groupinfo, inventory_dict['all']['children'][args.groupinfo]['vars'][args.groupinfo +"_url"], memberlist,""]
         writer.writerow(data)
+
+if args.groupmembers:
+    
+    with open(artifact_directory + "groupmembers.csv", 'w', newline='') as file:
+        # create writer
+        writer = csv.writer(file, delimiter='\t')
+
+        # Write header to CSV
+        header = ['name', 'action']
+        writer.writerow(header)
+
+        for key in inventory_dict['all']['children'][args.groupmembers]['hosts']:
+            #print(key)
+            data = [key, "Remove"]
+            writer.writerow(data)

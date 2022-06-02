@@ -5,7 +5,7 @@ all:
       hosts:
         afspeelapparaat1: null
       vars:
-        testgroep1_url: https://www.google.com
+        testgroep1_url: https://www.acquire.nl
     testgroep2:
       hosts:
         afspeelapparaat2: null

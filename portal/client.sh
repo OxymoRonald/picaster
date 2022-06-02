@@ -146,7 +146,7 @@ function client_options {
 
 # Set URL. client
 function client_set_url {
-    echo "We made it to the SET CLIENT URL menu"
+    #echo "We made it to the SET CLIENT URL menu"
 
     set_client_url=$(
         whiptail --title "PiCaster Management - Set Client URL" \
@@ -168,7 +168,7 @@ function client_set_url {
 		echo "No URL provided"
 		sleep 3
 		client_options
-    elif [[ ! -z "$selected_client" ]]
+    elif [[ ! -z "$set_client_url" ]]
 	then
         #echo "URL provided"
         clear
