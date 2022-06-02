@@ -221,7 +221,7 @@ function client_add_group {
     # Call funtion depending on menu choice.
     if [[ $selected_client_group = "<--" ]]
 	then
-		select_menu
+		client_options
     elif [[ ! -z "$selected_client_group" ]]
 	then
         echo "Client selected, add to group"
@@ -273,7 +273,7 @@ function client_remove_group {
     # Call funtion depending on menu choice.
     if [[ $selected_client_group_remove = "<--" ]]
 	then
-		select_menu
+		client_options
     elif [[ ! -z "$selected_client_group_remove" ]]
 	then
         echo "Client selected, remove from group"
