@@ -1,7 +1,6 @@
 ---
 # Target is device or group
-# ansible-playbook update-device-url.yml -e "target=afspeelapparaat1"
-# ansible-playbook update-device-url.yml -e "target=all"
+# ansible-playbook update-device-url.yml -e "target=afspeelapparaat1 target_url=https://www.youtube.com/embed/<VIDEOID?autoplay=1"
 
 # Update device/ group (afspeelapparaat)
 - name: Update target URL
@@ -9,3 +8,6 @@
   become: true
   roles: 
     - role: update-device-url
+  vars:
+    target: "{{ target }}"
+    target_url: "{{ target_url }}"
