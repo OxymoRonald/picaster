@@ -105,11 +105,12 @@ function client_options {
                              IP: "${clients_settings[1]}"
                             URL: "${clients_settings[2]}" 
                          Groups: "$client_grouplist"
-                        " 22 80 4 3>&1 1>&2 2>&3 \
+                        " 22 80 5 3>&1 1>&2 2>&3 \
                 "<--" "   BACK" \
                 "Set URL" "   Set client URL" \
                 "Add to group" "   Add client to group"\
-                "Remove from group" "   Remove client from group"
+                "Remove from group" "   Remove client from group" \
+                "Reset device" "   Reset client"
     )
     # To dispay a substring: ${clients_settings[2]:0:80}
     # Call funtion depending on menu choice.
@@ -125,6 +126,13 @@ function client_options {
     elif [[ $selected_client_options = "Remove from group" ]]
     then
         client_remove_group
+    elif [[ $selected_client_options = "Reset device" ]]
+    then
+        echo "Reset Client"
+        
+        ansible-playbook reset-device.yml -e "device_name="$selected_client""
+        sleep 3
+        client_options
 	elif [[ $? -eq 1 ]] 
 	then
 		echo "Cancel pressed. Exiting..."
@@ -290,3 +298,4 @@ function client_remove_group {
 		exit
     fi
 }
+
