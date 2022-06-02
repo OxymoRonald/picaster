@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # -------------------------------------------------- #
+# 	   This file contains all general functions      #
+# -------------------------------------------------- #
+
+# -------------------------------------------------- #
 # 	   Display welcome screen. (Start the menu)      #
 # -------------------------------------------------- #
 # This function displays the welcome screen.
@@ -61,24 +65,26 @@ function welcome {
 # -------------------------------------------------- #
 # 	           Select management type                #
 # -------------------------------------------------- #
+
+# Whiptail default outputs to stderr instead of stdout the "3>&1 1>&2 2>&3" switches it back to normal.
 function select_menu {
     # Create menu and store result in variable.
     selected_menu=$(
 		whiptail --title "PiCaster Management - Select Menu" \
 				 --menu "
-                Select management type." 12 78 3 3>&1 1>&2 2>&3 \
+                        Select management menu." 12 78 3 3>&1 1>&2 2>&3 \
 				 		"Client" "   Client Management." \
 						"Group" "   Group Management." \
 						"System" "   System Management."
     )
     # Call funtion depending on menu choice.
-    if [[ selected_menu = "Client" ]]
+    if [[ $selected_menu = "Client" ]]
     then
         client_menu
-    elif [[ select_menu = "Group" ]]
+    elif [[ $selected_menu = "Group" ]]
     then
         group_menu
-    elif [[ select_menu = "System" ]]
+    elif [[ $selected_menu = "System" ]]
     then
         system_menu
     elif [[ $? -eq 1 ]]
