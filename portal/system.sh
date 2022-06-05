@@ -12,12 +12,13 @@ function system_menu {
 				 --menu "
                         
                         System management menu.
-                        " 16 78 6 3>&1 1>&2 2>&3 \
+                        " 18 78 7 3>&1 1>&2 2>&3 \
            		        "<--" "BACK                " \
 				 		"Add Client" "   Client Management" \
 				 		"Remove Client" "   Client Management" \
 						"Add Group" "   Group Management" \
 						"Remove Group" "   Group Management" \
+						"Schedule" "   Set Automatic ON/OFF Time" \
 						"Patching" "   Patch Management"
     )
     # Call funtion depending on menu choice.
@@ -37,6 +38,10 @@ function system_menu {
     then
         echo "Remove Group"
         system_remove_group
+    elif [[ $system_menu_select = "Schedule" ]]
+    then
+        echo "Schedule"
+        system_schedule
     elif [[ $system_menu_select = "Patching" ]]
     then
         echo "Patching"
@@ -53,6 +58,168 @@ function system_menu {
         sleep 3
         select_menu
     fi
+}
+
+# System Schedule
+function system_schedule {
+    #sleep 3
+    echo "System schedule"
+
+    system_schedule_menu=$(
+        whiptail --title "PiCaster Management - System Schedule" \
+                 --menu "
+                  Set automatic ON and OFF time for screens.
+                            Currently set to:
+                               ON: 07:30
+                              OFF: 18:30
+
+                        " 16 78 3 3>&1 1>&2 2>&3 \
+                        "<--" "BACK                " \
+                        "ON" "   Set time to turn screens ON" \
+                        "OFF" "   Set time to turn screens OFF" 
+    )
+    # Call funtion depending on menu choice.
+    if [[ $system_schedule_menu = "<--" ]]
+	then
+		system_menu
+    elif [[ $system_schedule_menu = "ON" ]]
+    then
+        echo "Set ON time"
+        sleep 3
+        system_schedule_on=$(
+            whiptail --title "PiCaster Management - System Schedule" \
+                     --inputbox "
+                      Set time to turn screens ON.
+
+           Time must be entered without as follows: 0700 or 1930.
+            Do NOT use separator characters. 07:00 will NOT work
+                 " 12 80 3>&1 1>&2 2>&3
+        )
+        if [[ -z "$system_schedule_on" ]]
+        then
+            clear
+            echo "No time provided"
+            sleep 3
+            system_schedule
+        elif [[ ! -z "$system_schedule_on" ]]
+        then
+            echo "Time provided"
+            #ansible-playbook add-group.yml -e "groupname="$system_add_group_name" url="$system_add_group_url""
+            sleep 3
+            system_schedule
+        elif [[ $? -eq 1 ]] 
+        then
+            echo "Cancel pressed. Exiting..."
+            sleep 1
+            #clear
+            #exit
+            system_schedule
+        fi
+    elif [[ $system_schedule_menu = "OFF" ]]
+    then
+        echo "Set OFF time"
+        sleep 3
+        system_schedule_on=$(
+            whiptail --title "PiCaster Management - System Schedule" \
+                     --inputbox "
+                      Set time to turn screens OFF.
+
+           Time must be entered without as follows: 0700 or 1930.
+            Do NOT use separator characters. 07:00 will NOT work
+                 " 12 80 3>&1 1>&2 2>&3
+        )
+        if [[ -z "$system_schedule_off" ]]
+        then
+            clear
+            echo "No time provided"
+            sleep 3
+            system_schedule
+        elif [[ ! -z "$system_schedule_off" ]]
+        then
+            echo "Time provided"
+            #ansible-playbook add-group.yml -e "groupname="$system_add_group_name" url="$system_add_group_url""
+            sleep 3
+            system_schedule
+        elif [[ $? -eq 1 ]] 
+        then
+            echo "Cancel pressed. Exiting..."
+            sleep 1
+            #clear
+            #exit
+            system_schedule
+        fi
+    elif [[ $? -eq 1 ]]
+    then
+        echo "Cancel pressed. Exiting..."
+        sleep 2
+        clear
+        exit
+    else
+        clear
+        echo "Invalid selection"
+        sleep 3
+        system_menu
+    fi
+    system_menu
+}
+
+# Add Group
+function system_add_group {
+    echo "System Add Group"
+
+    system_add_group_name=$(
+        whiptail --title "PiCaster Management - Add Group" \
+                 --inputbox "
+                  Enter the name of the new group.
+
+             Names can not have spaces or special characters.
+                 " 12 80 3>&1 1>&2 2>&3
+    )
+    if [[ -z "$system_add_group_name" ]]
+    then
+        clear
+        echo "No name provided"
+        sleep 3
+        system_add_group
+    elif [[ ! -z "$system_add_group_name" ]]
+    then
+        echo "Group name provided"
+        system_add_group_url=$(
+            whiptail --title "PiCaster Management - Add Group" \
+                    --inputbox "
+        Enter the URL of the page you want the group to display.
+                    Including the "https://" part
+
+  To play a youtube video/ stream in fullscreen use the following format. 
+                 (This only works on embedable videos)
+
+           https://www.youtube.com/embed/<VIDEOID?autoplay=1
+
+                    " 12 80 3>&1 1>&2 2>&3
+        )
+        if [[ -z "$system_add_group_url" ]]
+        then
+            clear
+            echo "No URL provided"
+            sleep 3
+            system_add_group
+        elif [[ ! -z "$system_add_group_url" ]]
+        then
+            echo "Group URL provided"
+            ansible-playbook add-group.yml -e "groupname="$system_add_group_name" url="$system_add_group_url""
+            sleep 3
+            system_menu
+        elif [[ $? -eq 1 ]] 
+        then
+            echo "Cancel pressed. Exiting..."
+            sleep 1
+            #clear
+            #exit
+            system_menu
+        fi
+    fi
+
+    system_menu
 }
 
 # Add client. Name / IP / URL
@@ -209,64 +376,6 @@ function system_remove_client {
     system_menu
 }
 
-# Add group. Name / URL
-function system_add_group {
-    echo "Add Group"
-
-    system_add_group_name=$(
-        whiptail --title "PiCaster Management - Add Group" \
-                 --inputbox "
-                  Enter the name of the new group.
-
-             Names can not have spaces or special characters.
-                 " 12 80 3>&1 1>&2 2>&3
-    )
-    if [[ -z "$system_add_group_name" ]]
-    then
-        # clear
-        echo "No name provided"
-        sleep 3
-        system_add_client
-    elif [[ ! -z "$system_add_group_name" ]]
-    then
-        echo "Group name provided"
-        system_add_group_url=$(
-            whiptail --title "PiCaster Management - Add Group" \
-                    --inputbox "
-        Enter the URL of the page you want the group to display.
-                    Including the "https://" part
-
-  To play a youtube video/ stream in fullscreen use the following format. 
-                 (This only works on embedable videos)
-
-           https://www.youtube.com/embed/<VIDEOID?autoplay=1
-
-                    " 12 80 3>&1 1>&2 2>&3
-        )
-        if [[ -z "$system_add_group_url" ]]
-        then
-            # clear
-            echo "No URL provided"
-            sleep 3
-            system_add_client
-        elif [[ ! -z "$system_add_group_url" ]]
-        then
-            echo "Group URL provided"
-            ansible-playbook add-group.yml -e "groupname="$system_add_group_name" url="$system_add_group_url""
-            sleep 3
-            system_menu
-        
-        elif [[ $? -eq 1 ]] 
-        then
-            echo "Cancel pressed. Exiting..."
-            sleep 1
-            #clear
-            #exit
-            system_menu
-        fi
-        
-}
-
 # Remove group. List
 function system_remove_group {
     echo "Remove Group"
@@ -323,12 +432,12 @@ function system_remove_group {
     system_menu
 }
 
-# Set time to turn on/ off
-function system_set_timers {
-    echo "Set Timers"
-    sleep 3
-    system_menu
-}
+# # Set time to turn on/ off
+# function system_set_timers {
+#     echo "Set Timers"
+#     sleep 3
+#     system_menu
+# }
 
 # Patching. Single client / All clients
 function system_patching {
@@ -338,11 +447,15 @@ function system_patching {
         whiptail --title "PiCaster Management - Select Menu" \
                  --menu "
                         Select management menu." 12 78 3 3>&1 1>&2 2>&3 \
+                        "<--" "BACK                " \
                         "Single Client" "   Client Management." \
                         "All Clients" "   Group Management." 
     )
     # Call funtion depending on menu choice.
-    if [[ $system_patching_menu = "Single Client" ]]
+    if [[ $system_patching_menu = "<--" ]]
+	then
+		system_menu
+    elif [[ $system_patching_menu = "Single Client" ]]
     then
         system_patching_single
     elif [[ $system_patching_menu = "All Clients" ]]
@@ -362,6 +475,7 @@ function system_patching {
         sleep 3
         system_menu
     fi
+    system_menu 
 }
 
 # Patching single client. List

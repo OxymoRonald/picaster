@@ -8,3 +8,5 @@
   become: true
   roles: 
     - role: configure-device
+  vars: 
+    device_url: "{{ target_url }}"
