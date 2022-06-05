@@ -77,13 +77,13 @@ function group_menu_details {
 		whiptail --title "PiCaster Management - Group Options" \
 				 --menu "
                               Group information.
-						   Name: "${group_details[0]}"
-                            URL: "${group_details[1]}" 
-                        Clients: "$group_clients"
-                        " 16 80 5 3>&1 1>&2 2>&3 \
+                         Name: "${group_details[0]}"
+                          URL: "${group_details[1]}" 
+                      Clients: "$group_clients"
+                        " 18 80 5 3>&1 1>&2 2>&3 \
                 "<--" "   BACK" \
                 "Set URL" "   Set group URL" \
-                "Edit Members" "   Remove members from group" \
+                "Remove Members" "   Remove members from group" \
                 "Enable" "   Enable group"\
                 "Disable" "   Disable group"
 	)
@@ -93,7 +93,7 @@ function group_menu_details {
 	elif [[ $selected_group_options = "Set URL" ]]
     then
         group_menu_set_url
-	elif [[ $selected_group_options = "Edit Members" ]]
+	elif [[ $selected_group_options = "Remove Members" ]]
     then
         group_menu_members
 	elif [[ $selected_group_options = "Enable" ]]
@@ -137,7 +137,7 @@ function group_menu_set_url {
 
            https://www.youtube.com/embed/<VIDEOID?autoplay=1
 
-                            " 12 80 3>&1 1>&2 2>&3
+                            " 18 80 3>&1 1>&2 2>&3
     )
 	if [[ -z "$set_group_url" ]]
 	then

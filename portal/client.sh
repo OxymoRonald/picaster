@@ -167,7 +167,7 @@ function client_set_url {
 
            https://www.youtube.com/embed/<VIDEOID?autoplay=1
 
-                            " 12 80 3>&1 1>&2 2>&3
+                            " 18 80 3>&1 1>&2 2>&3
     )
     # Call function depending on choice.
 	if [[ -z "$set_client_url" ]]

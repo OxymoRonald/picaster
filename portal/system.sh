@@ -195,7 +195,7 @@ function system_add_group {
 
            https://www.youtube.com/embed/<VIDEOID?autoplay=1
 
-                    " 12 80 3>&1 1>&2 2>&3
+                    " 18 80 3>&1 1>&2 2>&3
         )
         if [[ -z "$system_add_group_url" ]]
         then
@@ -274,7 +274,7 @@ function system_add_client {
 
            https://www.youtube.com/embed/<VIDEOID?autoplay=1
 
-                        " 12 80 3>&1 1>&2 2>&3
+                        " 18 80 3>&1 1>&2 2>&3
             )
             if [[ -z "$system_add_client_url" ]]
             then

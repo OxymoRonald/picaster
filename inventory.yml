@@ -9,7 +9,7 @@ all:
         testgroep1_url: https://www.acquire.nl
     testgroep2:
       hosts:
-        dummy: null
+        Democlient1: null
       vars:
         testgroep2_url: https://www.bing.com
     testgroep3:
@@ -21,6 +21,6 @@ all:
     Democlient1:
       ansible_host: 192.168.1.151
       target_url: https://www.acquire.nl
-  vars: 
-    system_on: 730
+  vars:
     system_off: 1900
+    system_on: 730
